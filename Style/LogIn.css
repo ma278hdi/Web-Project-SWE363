@@ -22,6 +22,10 @@ header{
 .navigation a:hover{
     background-color: aquamarine;
 }
+body{
+    display: flex;
+    justify-content: center;
+}
 
 .boxLogIn{
     
