@@ -1,7 +1,4 @@
-*{
-    margin: 0;
-    padding: 0;
-}
+
 header{
     position: fixed;
     top: 0;
@@ -11,7 +8,6 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 99;
     background-color: blanchedalmond;
 }
 
@@ -27,7 +23,8 @@ header{
     background-color: aquamarine;
 }
 
-body{
+.boxLogIn{
+    
     display: flex;
     justify-content: center;
     align-items: center;
