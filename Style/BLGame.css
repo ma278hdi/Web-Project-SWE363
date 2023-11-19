@@ -1,0 +1,35 @@
+
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+}
+
+.navigation a{
+    position: relative;
+    font-size: 1.2em;
+    margin-left: 40px;
+    color: black;
+    text-decoration: none;
+    margin-left: 40px;
+}
+.navigation a:hover{
+    background-color: aquamarine;
+}
+body{
+    display: flex;
+    justify-content: center;
+    background-color: #4CBBC2;
+}
+
+.board{
+    position: absolute;
+    top: 30%;
+    
+}
