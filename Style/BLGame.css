@@ -31,5 +31,26 @@ body{
 .board{
     position: absolute;
     top: 30%;
-    
+}
+
+.cell {
+    font-family: sans-serif;
+    font-size: larger;
+    font-weight: bolder;
+    background-color: beige;
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cell:hover{
+    background-color: blanchedalmond;
+}
+
+.row {
+    display: flex;
 }
