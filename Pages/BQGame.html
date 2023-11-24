@@ -19,6 +19,7 @@
 
         </nav>
     </header>
+    <div class="turn-indicator" id="turnIndicator">Player 1's Turn</div>
     <div class="board">
         <div class="row">
             <div class="cell"></div>
@@ -47,5 +48,116 @@
 
         </div>
     </div>
+    <div class="set">
+        <div class="row">
+            <div class="Pcell">
+                <img src="QuartoPieces/black_B_F_R.png" alt="B_B_F_R" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="QuartoPieces/Black_B_H_R.png" alt="B_B_F_R" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="QuartoPieces/Black_S_F_R.png" alt="B_B_F_R" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="QuartoPieces/Black_S_H_R.png" alt="B_B_F_R" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="QuartoPieces/Red_B_F_R.png" alt="B_B_F_R" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="QuartoPieces/Red_B_H_R.png" alt="B_B_F_R" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="QuartoPieces/Red_S_F_R.png" alt="B_B_F_R" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="QuartoPieces/Red_S_H_R.png" alt="B_B_F_R" width="100" height="100">
+            </div>
+        </div>
+        <div class="row">
+            <div class="Pcell">
+                <img src="QuartoPieces/black_B_F_C.png" alt="B_B_F_R" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="QuartoPieces/Black_B_H_C.png" alt="B_B_F_R" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="QuartoPieces/Black_S_F_C.png" alt="B_B_F_R" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="QuartoPieces/Black_S_H_C.png" alt="B_B_F_R" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="QuartoPieces/Red_B_F_C.png" alt="B_B_F_R" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="QuartoPieces/Red_B_H_C.png" alt="B_B_F_R" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="QuartoPieces/Red_S_F_C.png" alt="B_B_F_R" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="QuartoPieces/Red_S_H_C.png" alt="B_B_F_R" width="100" height="100">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get the game board and piece set
+            const gameBoard = document.getElementsByClassName("board")[0];
+            const pieceSet = document.getElementsByClassName("set")[0];
+            const turnIndicator = document.getElementById("turnIndicator");
+
+            // Player turn indicator
+            let currentPlayer = 1; // Start with Player 1
+    
+            // Add click event listeners to each image in the piece set
+            const pieceCells = pieceSet.querySelectorAll(".Pcell");
+            pieceCells.forEach(function (cell) {
+                cell.addEventListener("click", function (event) {
+                    // Store information about the clicked image
+                    const clickedImage = event.target
+                    const pieceInfo = {
+                        src: clickedImage.src,
+                        alt: clickedImage.alt,
+                        width: clickedImage.width,
+                        height: clickedImage.height
+                    };
+    
+                    // Add click event listeners to each empty cell in the game board
+                    const emptyCells = gameBoard.querySelectorAll(".cell:empty");
+                    emptyCells.forEach(function (emptyCell) {
+                        emptyCell.addEventListener("click", function () {
+                            // Check if the move is valid (cell is empty)
+                            if (emptyCell.innerHTML.trim() === "") {
+                            // Update the content of the clicked cell with the stored information
+                            emptyCell.innerHTML = `<img src="${pieceInfo.src}" alt="${pieceInfo.alt}" width="${pieceInfo.width}" height="${pieceInfo.height}">`;
+
+                            // Clear the piece from the piece set
+                            cell.innerHTML = "";
+
+                            // Check for a winning condition after placing a piece
+                            //if (checkForWin(emptyCell)) {
+                                //alert(`Player ${currentPlayer} wins!`);
+                                // You may want to reset the game at this point
+                            //}
+
+                            // Switch players
+                            currentPlayer = (currentPlayer === 1) ? 2 : 1;
+
+                            // Update the turn indicator
+                            turnIndicator.innerText = `Player ${currentPlayer}'s Turn`;
+                        }
+                        });
+                    });
+                });
+            });
+        });
+    </script>
+
+
+
 </body>
 </html>
