@@ -19,7 +19,6 @@
 
         </nav>
     </header>
-    <div class="turn-indicator" id="turnIndicator">Player 1's Turn</div>
     <div class="board">
         <div class="row">
             <div class="cell"></div>
@@ -48,6 +47,7 @@
 
         </div>
     </div>
+    <div class="turn-indicator" id="turnIndicator">Player 1's Turn</div>
     <div class="set">
         <div class="row">
             <div class="Pcell">
@@ -105,15 +105,11 @@
 
     <script>
 document.addEventListener("DOMContentLoaded", function () {
-    // Get the game board and piece set
     const gameBoard = document.getElementsByClassName("board")[0];
     const pieceSet = document.getElementsByClassName("set")[0];
     const turnIndicator = document.getElementById("turnIndicator");
-
-    // Player turn indicator
-    let currentPlayer = 1; // Start with Player 1
-
-    // Declare cell as a global variable
+    let currentPlayer = 1;
+    let i = 0;
     let cell;
 
     // Function to remove click event listeners from all empty cells
@@ -124,30 +120,40 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    function checkForWin(CheckBoard){
+
+    }
+
+    function reset(){
+        location.reload();
+    }
+
     // Function to handle click on an empty cell
     function handleEmptyCellClick() {
-        // Check if the move is valid (cell is empty)
+        // Check if the move is valid 
         const emptyCell = event.target;
-        if (emptyCell.innerHTML === "") {
+        if (emptyCell.innerHTML == "") {
             // Update the content of the clicked cell with the stored information
             emptyCell.innerHTML = `<img src="${pieceInfo.src}" alt="${pieceInfo.alt}" width="${pieceInfo.width}" height="${pieceInfo.height}">`;
-            
-            // Clear the piece from the piece set
             cell.innerHTML = "";
 
-             //Check for a winning condition after placing a piece
-             // if (checkForWin(emptyCell))
-             //if (true) {
-             //    alert(`Player ${currentPlayer} wins!`);
-                 //You may want to reset the game at this point
-             //}
+            let CheckBoard = [];
+            for (let i = 0; i < 4; i++) {
+                CheckBoard[i] = [];
+                for (let j = 0; j < 4; j++) {
+                    const imgElement = document.getElementsByClassName("cell")[i * 4 + j].querySelector("img");
+                    CheckBoard[i][j] = imgElement ? imgElement.alt : "";
+                }
+            }
 
-            // Switch players
+            console.log(CheckBoard);
+            //Check for a winning condition after placing a piece
+            //if (checkForWin(CheckBoard)) {
+            //  alert(`Player ${currentPlayer} wins!`);
+            //  reset()
+            //}
             currentPlayer = (currentPlayer === 2) ? 2 : 1;
-
-            // Update the turn indicator
             turnIndicator.innerText = `Player ${currentPlayer}'s Turn`;
-
             // Remove click event listeners from all empty cells
             removeEmptyCellListeners();
         }
@@ -166,25 +172,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 height: clickedImage.height
             };
             currentPlayer = (currentPlayer === 1) ? 2 : 1;
-
-            // Update the turn indicator
             turnIndicator.innerText = `Player ${currentPlayer}'s Turn`;
-
-            // Assign the currentCell to the global variable cell
             cell = currentCell;
-
             // Remove click event listeners from all empty cells before attaching new ones
             removeEmptyCellListeners();
-
             // Add click event listeners to each empty cell in the game board
             const emptyCells = gameBoard.querySelectorAll(".cell:empty");
             emptyCells.forEach(function (emptyCell) {
                 emptyCell.addEventListener("click", handleEmptyCellClick);
+                
             });
         });
     });
 });
-
     </script>
 
 

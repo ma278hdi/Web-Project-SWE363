@@ -24,13 +24,17 @@ header{
 }
 body{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     background-color: #4CBBC2;
 } 
 
 .board{
-    position: absolute;
-    top: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
 }
 
 .cell {
@@ -60,7 +64,6 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 175vh;
 }
 
 .Pcell {
@@ -82,6 +85,9 @@ body{
 }
 
 .turn-indicator{
-    position: absolute;
-    top: 20%;
+    font-size: x-large;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
