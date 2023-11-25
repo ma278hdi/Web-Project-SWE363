@@ -109,6 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const pieceSet = document.getElementsByClassName("set")[0];
     const turnIndicator = document.getElementById("turnIndicator");
     let currentPlayer = 1;
+    let gameEnded = false
     let i = 0;
     let cell;
 
@@ -121,7 +122,58 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function checkForWin(CheckBoard){
+            // Check rows
+        for (let i = 0; i < 4; i++) {
+            for (let j = 0; j < 8; j = j + 2) {
+            console.log(j)
+            if (CheckBoard[i][0].charAt(j) !== "" && CheckBoard[i][0].charAt(j) === CheckBoard[i][1].charAt(j) && CheckBoard[i][0].charAt(j) === CheckBoard[i][2].charAt(j) && CheckBoard[i][0].charAt(j) === CheckBoard[i][3].charAt(j)) {
+                gameEnded = true;
+                return;} 
+            }
+        }
+            // Check columns
+        for (let i = 0; i < 4; i++) {
+            for (let j = 0; j < 8; j = j + 2) {
+            console.log(j)
+            if (CheckBoard[0][i].charAt(j) !== "" && CheckBoard[0][i].charAt(j) === CheckBoard[1][i].charAt(j) && CheckBoard[0][i].charAt(j) === CheckBoard[2][i].charAt(j) && CheckBoard[0][i].charAt(j) === CheckBoard[3][i].charAt(j)) {
+                gameEnded = true;
+                return;} 
+            }
+        }
 
+            // Check diagonals
+        for (let j = 0; j < 8; j = j + 2) {
+            console.log(j)
+            if (CheckBoard[0][0].charAt(j) !== "" && CheckBoard[0][0].charAt(j) === CheckBoard[1][1].charAt(j) && CheckBoard[0][0].charAt(j) === CheckBoard[2][2].charAt(j) && CheckBoard[0][0].charAt(j) === CheckBoard[3][3].charAt(j)) {
+                gameEnded = true;
+                return;} 
+            }
+        for (let j = 0; j < 8; j = j + 2) {
+            console.log(j)
+            if (CheckBoard[0][3].charAt(j) !== "" && CheckBoard[0][3].charAt(j) === CheckBoard[1][2].charAt(j) && CheckBoard[0][3].charAt(j) === CheckBoard[2][1].charAt(j) && CheckBoard[0][3].charAt(j) === CheckBoard[3][0].charAt(j)) {
+                gameEnded = true;
+                return;} 
+            }
+
+
+
+        // Check for draw
+        let isDraw = true;
+        for (let i = 0; i < 4; i++) {
+            for (let j = 0; j < 4; j++) {
+                if (CheckBoard[i][j] === "") {
+                    isDraw = false;
+                    break;
+                }
+            }
+            if (!isDraw) break;
+        }
+
+        if (isDraw) {
+            gameEnded = false;
+            alert("draw");
+            reset()
+        }
     }
 
     function reset(){
@@ -146,12 +198,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             }
 
-            console.log(CheckBoard);
-            //Check for a winning condition after placing a piece
-            //if (checkForWin(CheckBoard)) {
-            //  alert(`Player ${currentPlayer} wins!`);
-            //  reset()
-            //}
+            checkForWin(CheckBoard)
+            if (gameEnded) {
+              alert(`Player ${currentPlayer} wins!`);
+              reset()
+            }
+            
             currentPlayer = (currentPlayer === 2) ? 2 : 1;
             turnIndicator.innerText = `Player ${currentPlayer}'s Turn`;
             // Remove click event listeners from all empty cells
@@ -163,6 +215,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const pieceCells = pieceSet.querySelectorAll(".Pcell");
     pieceCells.forEach(function (currentCell) {
         currentCell.addEventListener("click", function (event) {
+            currentCell.style.backgroundColor = "#f5cf9b"
             // Store information about the clicked image
             let clickedImage = event.target;
             pieceInfo = {
