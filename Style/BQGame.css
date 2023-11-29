@@ -91,3 +91,10 @@ body{
     align-items: center;
     justify-content: center;
 }
+
+section{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    border-left: 20px;
+}
