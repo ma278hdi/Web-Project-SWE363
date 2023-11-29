@@ -158,6 +158,14 @@ body{
 section{
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
-    border-left: 20px;
+}
+section button{
+    margin-bottom: 50px;
+    margin-left: 20px;
+    height: 30px;
+    width: 70px;
+    border-radius: 8px;
+    background-color: #2196F3;
+    border: 2px solid rgb(0, 81, 255);
+    color: white;
 }
