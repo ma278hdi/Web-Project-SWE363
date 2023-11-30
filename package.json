@@ -1,0 +1,15 @@
+{
+  "name": "web-project-swe363",
+  "version": "1.0.0",
+  "description": "mongoDB ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mahdi",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^8.0.2"
+  }
+}
