@@ -1,0 +1,52 @@
+
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: blanchedalmond;
+}
+
+.navigation a{
+    position: relative;
+    font-size: 1.2em;
+    margin-left: 40px;
+    color: black;
+    text-decoration: none;
+    margin-left: 40px;
+}
+.navigation a:hover{
+    background-color: aquamarine;
+}
+body{
+    display: flex;
+    justify-content: center;
+    background-color: rgb(0, 162, 255);
+}
+
+.boxLogIn{
+    position: relative;
+    top: 200px;
+    height: 400px;
+    width: 400px;
+    background-color: rgb(37, 113, 154);
+    border: 2px solid rgb(37,113 ,154 );
+}
+form{
+    display: grid;
+}
+
+button{
+    margin-left: 145px;
+    margin-top: 50px;
+    border: solid 2px;
+    border-radius: 8px;
+}
+
+div h2{
+margin-left: 145px;
+}
