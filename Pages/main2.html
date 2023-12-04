@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L Game</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        #board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+        }
+
+        .cell {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #000;
+            box-sizing: border-box;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .player1 {
+            background-color: #00f;
+        }
+
+        .player2 {
+            background-color: #f00;
+        }
+
+        .winner {
+            background-color: #0f0;
+        }
+
+        .ghost {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        #resetButton {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #ccc;
+            cursor: pointer;
+        }
+
+        #turnLabel {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="turnLabel">Player 1's Turn</div>
+<div id="board"></div>
+<button id="resetButton" onclick="resetGame()">Reset Game</button>
+
+<script>
+    const board = document.getElementById('board');
+    const cells = [];
+    let currentPlayer = 1;
+    let gameActive = true;
+    let ghostCells = [];
+
+    // Initialize the board
+    for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 4; j++) {
+            const cell = document.createElement('div');
+            cell.className = 'cell';
+            cell.dataset.row = i;
+            cell.dataset.col = j;
+            cell.addEventListener('click', handleCellClick);
+            cell.addEventListener('mouseover', handleCellMouseOver);
+            cell.addEventListener('mouseout', handleCellMouseOut);
+            cells.push(cell);
+            board.appendChild(cell);
+        }
+    }
+
+    function handleCellClick() {
+        if (!gameActive) return;
+
+        const cell = this;
+
+        if (cell.classList.contains('player1') || cell.classList.contains('player2')) {
+            alert('Cell already filled. Choose another cell.');
+            return;
+        }
+
+        // Update the board based on the current player
+        if (currentPlayer === 1) {
+            // Player 1's modified L shape with one side on the side
+            fillCell(cell);
+            fillCell(getCell(cell.dataset.row, parseInt(cell.dataset.col) + 1));
+            fillCell(getCell(cell.dataset.row, parseInt(cell.dataset.col) + 2));
+            fillCell(getCell(parseInt(cell.dataset.row) + 1, parseInt(cell.dataset.col) + 2));
+        } else {
+            // Player 2's modified L shape with one side on the side
+            fillCell(cell);
+            fillCell(getCell(cell.dataset.row, parseInt(cell.dataset.col) + 1));
+            fillCell(getCell(cell.dataset.row, parseInt(cell.dataset.col) + 2));
+            fillCell(getCell(parseInt(cell.dataset.row) + 1, parseInt(cell.dataset.col) + 2));
+        }
+
+        // Check for a winner
+        if (checkForWinner()) {
+            alert(`Player ${currentPlayer} wins!`);
+            gameActive = false;
+            markWinningCells();
+        } else {
+            // Switch to the next player
+            currentPlayer = currentPlayer === 1 ? 2 : 1;
+            updateTurnLabel();
+        }
+    }
+
+    function handleCellMouseOver() {
+        const cell = this;
+
+        if (!cell.classList.contains('player1') && !cell.classList.contains('player2')) {
+            // Show ghost cells for the modified L shape with one side on the side
+            ghostCells.push(cell);
+            ghostCells.push(getCell(cell.dataset.row, parseInt(cell.dataset.col) + 1));
+            ghostCells.push(getCell(cell.dataset.row, parseInt(cell.dataset.col) + 2));
+            ghostCells.push(getCell(parseInt(cell.dataset.row) + 1, parseInt(cell.dataset.col) + 2));
+
+            ghostCells.forEach((ghostCell) => {
+                if (ghostCell) {
+                    ghostCell.classList.add('ghost');
+                }
+            });
+        }
+    }
+
+    function handleCellMouseOut() {
+        // Clear the ghost cells when mouse leaves the cell
+        ghostCells.forEach((ghostCell) => {
+            if (ghostCell) {
+                ghostCell.classList.remove('ghost');
+            }
+        });
+
+        ghostCells = [];
+    }
+
+    function checkForWinner() {
+        // Implement your winning conditions here
+        // For simplicity, let's consider the player who completes the modified L shape with one side on the side wins
+        //return (
+        //    checkModifiedLShape(1) || // Check for Player 1
+        //    checkModifiedLShape(2)    // Check for Player 2
+        //);
+		
+		return (
+            false
+        );
+		
+    }
+
+    function checkModifiedLShape(player) {
+        // Check for modified L shape with one side on the side in rows
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 2; j++) {
+                if (
+                    cells[i * 4 + j].classList.contains(`player${player}`) &&
+                    cells[i * 4 + j + 1].classList.contains(`player${player}`) &&
+                    cells[i * 4 + j + 2].classList.contains(`player${player}`) &&
+                    cells[(i + 1) * 4 + j + 2].classList.contains(`player${player}`)
+                ) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    function fillCell(cell) {
+        if (cell) {
+            if (currentPlayer === 1) {
+                cell.classList.add('player1');
+	
+            } else {
+                cell.classList.add('player2');
+				
+            }
+        }
+    }
+
+    function getCell(row, col) {
+        return cells.find((cell) => cell.dataset.row == row && cell.dataset.col == col);
+    }
+
+    function markWinningCells() {
+        // Mark the winning cells for visual indication
+        const playerClass = currentPlayer === 1 ? 'player1' : 'player2';
+        cells.forEach((cell) => {
+            if (cell.classList.contains(playerClass)) {
+                cell.classList.add('winner');
+            }
+        });
+    }
+
+    function resetGame() {
+        // Reset the game
+        cells.forEach((cell) => {
+            cell.className = 'cell';
+        });
+
+        currentPlayer = 1;
+        gameActive = true;
+        updateTurnLabel();
+    }
+
+    function updateTurnLabel() {
+        const turnLabel = document.getElementById('turnLabel');
+        turnLabel.textContent = `Player ${currentPlayer}'s Turn`;
+    }
+</script>
+
+</body>
+</html>
