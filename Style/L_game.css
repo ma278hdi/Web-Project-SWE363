@@ -87,15 +87,16 @@ header{
 body{
     display: flex;
     justify-content: center;
-    background-color: #4CBBC2;
+    background-color: #00C2FF;
 }
 
 .container{
-    background-color:#4B9A70;
-    height: 550px;
-    width: 700px;
+    background-color:#3C7BB5;
+    height: 650px;
+    width: 800px;
     position: absolute;
     top: 20%;
+    border-radius: 20px;
 }
 
 .container h2 {
@@ -110,15 +111,16 @@ flex-direction: column;
 text-align: center;
 justify-content: center;
 width: 100px;
-margin-left: 38%;
+margin-left: 30%;
 }
 
 .container_btn button{
     margin-bottom: 20px;
     border-radius: 25px;
-    height: 35px;
-    width: 150px;
+    height: 55px;
+    width: 300px;
     background-color: #3D78EB;
     border: 2px solid #205bd2;
     color: white;
+    font-size: large;
 }
