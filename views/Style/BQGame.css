@@ -180,7 +180,7 @@ section button{
   text-decoration: none #000000 solid;
   text-decoration-thickness: auto;
   width: 100%;
-  max-width: 460px;
+  max-width: 300px;
   position: relative;
   cursor: pointer;
   transform: rotate(-2deg);

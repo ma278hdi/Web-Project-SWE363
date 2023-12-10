@@ -96,6 +96,7 @@ body{
     width: 700px;
     position: absolute;
     top: 20%;
+    border-radius: 20px;
 }
 
 .container h2 {
