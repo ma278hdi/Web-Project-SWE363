@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borad</title>
+    <link rel="stylesheet" href="../Style/BQGame.css">
+</head>
+<body>
+    <header>
+        <h2 class="logo">Game Platform</h2>
+        <nav class="navigation">
+            <a href="">Home</a>
+            <a href="">Games</a>
+            <a href="">Profile</a>
+            <input type="text" placeholder="Search">
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+            </label>
+
+        </nav>
+    </header>
+    <div class="board">
+        <div class="row">
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+        </div>
+        <div class="row">
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+        </div>
+        <div class="row">
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+
+        </div>
+        <div class="row">
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+
+        </div>
+    </div>
+
+    <section>
+
+    <button>reset</button>
+    <button>give up</button>
+    
+    </section>
+
+    <div class="turn-indicator" id="turnIndicator">Player 1's Turn</div>
+    <div class="set">
+        <div class="row">
+            <div class="Pcell">
+                <img src="../QuartoPieces/black_B_F_R.png" alt="B_B_F_R" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="../QuartoPieces/Black_B_H_R.png" alt="B_B_H_R" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="../QuartoPieces/Black_S_F_R.png" alt="B_S_F_R" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="../QuartoPieces/Black_S_H_R.png" alt="B_S_H_R" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="../QuartoPieces/Red_B_F_R.png" alt="R_B_F_R" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="../QuartoPieces/Red_B_H_R.png" alt="R_B_H_R" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="../QuartoPieces/Red_S_F_R.png" alt="R_S_F_R" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="../QuartoPieces/Red_S_H_R.png" alt="R_S_H_R" width="100" height="100">
+            </div>
+        </div>
+        <div class="row">
+            <div class="Pcell">
+                <img src="../QuartoPieces/black_B_F_C.png" alt="B_B_F_C" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="../QuartoPieces/Black_B_H_C.png" alt="B_B_H_C" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="../QuartoPieces/Black_S_F_C.png" alt="B_S_F_C" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="../QuartoPieces/Black_S_H_C.png" alt="B_S_H_C" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="../QuartoPieces/Red_B_F_C.png" alt="R_B_F_C" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="../QuartoPieces/Red_B_H_C.png" alt="R_B_H_C" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="../QuartoPieces/Red_S_F_C.png" alt="R_S_F_C" width="100" height="100">
+            </div>
+            <div class="Pcell">
+                <img src="../QuartoPieces/Red_S_H_C.png" alt="R_S_H_C" width="100" height="100">
+            </div>
+        </div>
+    </div>
+
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const gameBoard = document.getElementsByClassName("board")[0];
+    const pieceSet = document.getElementsByClassName("set")[0];
+    const turnIndicator = document.getElementById("turnIndicator");
+    let currentPlayer = 1;
+    let gameEnded = false
+    let i = 0;
+    let cell;
+
+    // Function to remove click event listeners from all empty cells
+    function removeEmptyCellListeners() {
+        const emptyCells = gameBoard.querySelectorAll(".cell:empty");
+        emptyCells.forEach(function (emptyCell) {
+            emptyCell.removeEventListener("click", handleEmptyCellClick);
+        });
+    }
+
+    function checkForWin(CheckBoard){
+            // Check rows
+        for (let i = 0; i < 4; i++) {
+            for (let j = 0; j < 8; j = j + 2) {
+            console.log(j)
+            if (CheckBoard[i][0].charAt(j) !== "" && CheckBoard[i][0].charAt(j) === CheckBoard[i][1].charAt(j) && CheckBoard[i][0].charAt(j) === CheckBoard[i][2].charAt(j) && CheckBoard[i][0].charAt(j) === CheckBoard[i][3].charAt(j)) {
+                gameEnded = true;
+                return;} 
+            }
+        }
+            // Check columns
+        for (let i = 0; i < 4; i++) {
+            for (let j = 0; j < 8; j = j + 2) {
+            console.log(j)
+            if (CheckBoard[0][i].charAt(j) !== "" && CheckBoard[0][i].charAt(j) === CheckBoard[1][i].charAt(j) && CheckBoard[0][i].charAt(j) === CheckBoard[2][i].charAt(j) && CheckBoard[0][i].charAt(j) === CheckBoard[3][i].charAt(j)) {
+                gameEnded = true;
+                return;} 
+            }
+        }
+
+            // Check diagonals
+        for (let j = 0; j < 8; j = j + 2) {
+            console.log(j)
+            if (CheckBoard[0][0].charAt(j) !== "" && CheckBoard[0][0].charAt(j) === CheckBoard[1][1].charAt(j) && CheckBoard[0][0].charAt(j) === CheckBoard[2][2].charAt(j) && CheckBoard[0][0].charAt(j) === CheckBoard[3][3].charAt(j)) {
+                gameEnded = true;
+                return;} 
+            }
+        for (let j = 0; j < 8; j = j + 2) {
+            console.log(j)
+            if (CheckBoard[0][3].charAt(j) !== "" && CheckBoard[0][3].charAt(j) === CheckBoard[1][2].charAt(j) && CheckBoard[0][3].charAt(j) === CheckBoard[2][1].charAt(j) && CheckBoard[0][3].charAt(j) === CheckBoard[3][0].charAt(j)) {
+                gameEnded = true;
+                return;} 
+            }
+
+
+
+        // Check for draw
+        let isDraw = true;
+        for (let i = 0; i < 4; i++) {
+            for (let j = 0; j < 4; j++) {
+                if (CheckBoard[i][j] === "") {
+                    isDraw = false;
+                    break;
+                }
+            }
+            if (!isDraw) break;
+        }
+
+        if (isDraw) {
+            gameEnded = false;
+            alert("draw");
+            reset()
+        }
+    }
+
+    function reset(){
+        location.reload();
+    }
+
+    // Function to handle click on an empty cell
+    function handleEmptyCellClick() {
+        // Check if the move is valid 
+        const emptyCell = event.target;
+        if (emptyCell.innerHTML == "") {
+            // Update the content of the clicked cell with the stored information
+            emptyCell.innerHTML = `<img src="${pieceInfo.src}" alt="${pieceInfo.alt}" width="${pieceInfo.width}" height="${pieceInfo.height}">`;
+            cell.innerHTML = "";
+
+            let CheckBoard = [];
+            for (let i = 0; i < 4; i++) {
+                CheckBoard[i] = [];
+                for (let j = 0; j < 4; j++) {
+                    const imgElement = document.getElementsByClassName("cell")[i * 4 + j].querySelector("img");
+                    CheckBoard[i][j] = imgElement ? imgElement.alt : "";
+                }
+            }
+
+            checkForWin(CheckBoard)
+            if (gameEnded) {
+              alert(`Player ${currentPlayer} wins!`);
+              reset()
+            }
+            
+            currentPlayer = (currentPlayer === 2) ? 2 : 1;
+            turnIndicator.innerText = `Player ${currentPlayer}'s Turn`;
+            // Remove click event listeners from all empty cells
+            removeEmptyCellListeners();
+        }
+    }
+
+    // Add click event listeners to each image in the piece set
+    const pieceCells = pieceSet.querySelectorAll(".Pcell");
+    pieceCells.forEach(function (currentCell) {
+        currentCell.addEventListener("click", function (event) {
+            currentCell.style.backgroundColor = "#f5cf9b"
+            // Store information about the clicked image
+            let clickedImage = event.target;
+            pieceInfo = {
+                src: clickedImage.src,
+                alt: clickedImage.alt,
+                width: clickedImage.width,
+                height: clickedImage.height
+            };
+            currentPlayer = (currentPlayer === 1) ? 2 : 1;
+            turnIndicator.innerText = `Player ${currentPlayer}'s Turn`;
+            cell = currentCell;
+            // Remove click event listeners from all empty cells before attaching new ones
+            removeEmptyCellListeners();
+            // Add click event listeners to each empty cell in the game board
+            const emptyCells = gameBoard.querySelectorAll(".cell:empty");
+            emptyCells.forEach(function (emptyCell) {
+                emptyCell.addEventListener("click", handleEmptyCellClick);
+                
+            });
+        });
+    });
+});
+    </script>
+
+
+
+</body>
+</html>
