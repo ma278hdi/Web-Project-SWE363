@@ -52,8 +52,8 @@
 
     <section>
 
-    <button>reset</button>
-    <button>give up</button>
+    <button class="button" id = "resetButton">reset</button>
+    <button class="button">give up</button>
     
     </section>
 
@@ -189,6 +189,9 @@ document.addEventListener("DOMContentLoaded", function () {
     function reset(){
         location.reload();
     }
+
+    let resetButton = document.getElementById("resetButton");
+        resetButton.addEventListener("click", reset);
 
     // Function to handle click on an empty cell
     function handleEmptyCellClick() {
