@@ -19,7 +19,6 @@ app.set("view engine", "ejs")
 app.get('/', (req, res) => {
    res.render("Pages/mainPage")
   });
-  
 async function connect(){
     try{
         await mongoose.connect(url);

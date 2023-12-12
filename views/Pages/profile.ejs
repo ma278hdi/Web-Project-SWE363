@@ -4,14 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../Style/profile.css">
 </head>
 <body>
+    <header>
+        <h2 class="logo">Game Platform</h2>
+        <nav class="navigation">
+            <a href="">Home</a>
+            <a href="">Games</a>
+            <a href="">Profile</a>
+            <input type="text" placeholder="Search">
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+            </label>
+
+        </nav>
+    </header> 
+
     <% if(user) { %>
         <div class="profileInfo">
-            <img src="<%= user.picture %>" alt="">
-            <p><%= user.nickname %></p>
-            <p><%= user.email %></p>
+            <img src="<%= user.picture %>" alt="Avatar">
+            <p> username: <%= user.nickname %></p>
+            <p>Email: <%= user.email %></p>
         </div> 
+        <button>Edit Profile</button>
    <%} %>
 </body>
 </html>
