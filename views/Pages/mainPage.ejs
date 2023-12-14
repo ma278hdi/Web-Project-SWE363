@@ -10,9 +10,9 @@
     <header>
         <h2 class="logo">Game Platform</h2>
         <nav class="navigation">
-            <a href="">Home</a>
+            <a onclick="window.location.href='/mainPage'">Home</a>
             <a onclick="window.location.href = '/Q_game'">Games</a>
-            <a href="">Profile</a>
+            <a onclick="window.location.href='/profile'">Profile</a>
             <input type="text" placeholder="Search">
             <label class="switch">
                 <input type="checkbox">
@@ -32,7 +32,7 @@
             <h1 class="title">Welcome to Game Platform</h1>
             <p class="description">Play Quarto and L Game, invite friends, and compete for the top spot!</p>
             <div class="buttonGroup">
-                <button class="whiteButton">Log In</button>
+                <button class="whiteButton" onclick="window.location.href = '/Login'">Log In</button>
                 <button class="blackButton">Sign Up</button>
             </div>
         </header>
@@ -45,22 +45,29 @@
         <section class="featuredGame">
             <header class="container">
                 <h2 class="title">Featured Games</h2>
-                <button class="blackButton">Play Now</button>
+                <p class="description">Choose the game!</p>
+                <!-- <button class="blackButton" onclick="window.location.href = '/Q_game'">Play Quarto</button> -->
+                <br>
+                <!-- <button class="whiteButton" onclick="window.location.href = '/L_game'">Play L Game</button> -->
+
+
             </header>
         
                 <!-- List of Games -->
             <article class="list">
 
-                <figure class="card">
+                <figure class="card" id="quartoCard">
                     <img src="../mainPagePhotos/quartoLogo.jpeg" alt="Quarto Image" class="image">
                     <figcaption>
                         <h3 class="title">Quarto</h3>
+                        <!-- <p class="subtitle">2-4 players</p> -->
                         <p class="subtitle">2-4 players</p>
                     </figcaption>
+
                 </figure>
 
 
-                <figure class="card">
+                <figure class="card" id="lgameCard">
                     <img src="../mainPagePhotos/LGameLogo.png" alt="L Game Image" class="image">
                     <figcaption>
                         <h3 class="title">L Game</h3>
@@ -90,14 +97,6 @@
                                 Quarto is a strategy game where you aim to line up four elements with a common feature. Each player
                                 chooses and places a piece for their opponent, making each move crucial.
                             </p>
-                            <div class="user">
-                                <figure class="avatar">
-                                    <img src="" alt="Avatar Image" class="div">
-                                    <figcaption>
-                                        <h4 class="title-2">GamePlatform</h4>
-                                    </figcaption>
-                                </figure>
-                            </div>
                         </figcaption>
                     </figure>
                 </div>
@@ -112,14 +111,6 @@
                                 L Game is a classic board game where players take turns placing L-shaped pieces on a square grid. The
                                 goal is to form complete squares and strategically block your opponent from doing the same.
                             </p>
-                            <div class="user">
-                                <figure class="avatar">
-                                    <img src="" alt="Avatar Image" class="div">
-                                    <figcaption>
-                                        <h4 class="title-2">GamePlatform</h4>
-                                    </figcaption>
-                                </figure>
-                            </div>
                         </figcaption>
                     </figure>
                 </div>
@@ -134,10 +125,10 @@
 
             <article class="list">
 
-                <figure class="card">
+                <figure class="playerReviewCard">
                     <div class="user">
                         <figure class="avatar">
-                            <img src="path_to_avatar_image" alt="Avatar Image" class="div">
+                            <img src="../mainPagePhotos/profilePhoto.jpg" alt="Avatar Image" class="div">
                             <figcaption>
                                 <h3 class="text-wrapper">Mr X</h3>
                             </figcaption>
@@ -147,10 +138,10 @@
                 </figure>
 
 
-                <figure class="card">
+                <figure class="playerReviewCard">
                     <div class="user">
                         <figure class="avatar">
-                            <img src="path_to_avatar_image" alt="Avatar Image" class="div">
+                            <img src="../mainPagePhotos/profilePhoto.jpg" alt="Avatar Image" class="div">
                             <figcaption>
                                 <h3 class="text-wrapper">Mr Y</h3>
                             </figcaption>
@@ -181,7 +172,7 @@
                         <h3 class="text-wrapper">Top Players</h3>
                         <p class="subtitle">Ranked by wins</p>
                     </div>
-                    <p class="subtitle-2">Mr X</p>
+                    <h3 class="subtitle-2">Mr X</h3>
                 </figure>
 
 
@@ -193,7 +184,7 @@
                         <h3 class="text-wrapper">Most Active Players</h3>
                         <p class="subtitle">Ranked by number of games played</p>
                     </div>
-                    <p class="subtitle-2">Mr Y</p>
+                    <h3 class="subtitle-2">Mr Y</h3>
                 </figure>
 
             </article>
@@ -220,7 +211,7 @@
                             <span class="label-normal"><span class="label-text">#GamePlatform</span></span>
                         </div>
                         <figure class="avatar">
-                            <img src="../QuartoPieces/black_B_F_R.png" alt="Avatar Image" class="avatar-2">
+                            <img src="../mainPagePhotos/profilePhoto.jpg" alt="Avatar Image" class="avatar-2">
                             <figcaption>
                                 <h3 class="title-2">Mr Y</h3>
                             </figcaption>
@@ -238,7 +229,7 @@
                             <span class="label-normal"><span class="label-text">#Challenge</span></span>
                         </div>
                         <figure class="avatar">
-                            <img src="../QuartoPieces/black_B_F_R.png" alt="Avatar Image" class="avatar-2">
+                            <img src="../mainPagePhotos/profilePhoto.jpg" alt="Avatar Image" class="avatar-2">
                             <figcaption>
                                 <h3 class="title-2">Mr Z</h3>
                             </figcaption>
@@ -262,6 +253,29 @@
       <footer>
         <p>©Copyright 2023 by . All rights reversed.</p>
       </footer>
+
+
+    <script>
+
+        // Click on it to move to the Quarto game
+        var quartoCard = document.getElementById("quartoCard");
+        quartoCard.setAttribute("onclick", "goToQuarto()");
+
+        function goToQuarto() {
+        window.location.href = "/Q_game";
+        }
+
+        // Click on it to move to the L game
+        var lgameCard = document.getElementById("lgameCard");
+        lgameCard.setAttribute("onclick", "goToLGame()");
+
+        function goToLGame() {
+        window.location.href = "/L_game";
+        }
+
+
+
+    </script>
 
 
 

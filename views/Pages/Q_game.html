@@ -13,9 +13,9 @@
     <header>
         <h2 class="logo">Game Platform</h2>
         <nav class="navigation">
-            <a href="">Home</a>
-            <a href="">Games</a>
-            <a href="">Profile</a>
+            <a onclick="window.location.href='/mainPage'">Home</a>
+            <a onclick="window.location.href = '/Q_game'">Games</a>
+            <a onclick="window.location.href='/profile'">Profile</a>
             <input type="text" placeholder="Search">
             <label class="switch">
                 <input type="checkbox">
@@ -27,12 +27,13 @@
     <div class="container">
         <h2>Qurato Game</h2>
         <div class="container_btn">
-            <button class="button">Play Locally</button>
+            <button class="button" onclick="window.location.href = '/BQGame'">Play Locally</button>
             <button class="button">Play online</button>
             <button class="button">How To Play</button>
             <button class="button">Leaderboard</button>
             <button class="button">Setting</button>
-            <button class="button">exit</button>
+            <button class="button" onclick="window.location.href = '/mainPage'">Exit</button>
+
         </div>
     </div>
 </body>
