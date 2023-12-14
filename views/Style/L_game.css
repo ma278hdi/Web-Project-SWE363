@@ -19,7 +19,9 @@ header{
     margin-left: 40px;
 }
 .navigation a:hover{
-    background-color: aquamarine;
+  color: #00C2FF;
+    border-radius: 20%;
+    transition-duration: 1s;
 }
 
 .switch {
